@@ -1,0 +1,487 @@
+Exe stack:
+(string varf ; (varf=C:\Users\Gabriel Nasui\InteliJProjects\Lab3\src\test.in ; (openRFile(varf) ; (int varc ; (readFile(varf,varc) ; (print(varc) ; (readFile(varf,varc) ; (print(varc) ; closeRFile(varf)))))))))
+SymTable:
+Out:
+FileTable:
+Heap:
+
+-----------------------------------
+
+Exe stack:
+string varf
+(varf=C:\Users\Gabriel Nasui\InteliJProjects\Lab3\src\test.in ; (openRFile(varf) ; (int varc ; (readFile(varf,varc) ; (print(varc) ; (readFile(varf,varc) ; (print(varc) ; closeRFile(varf))))))))
+SymTable:
+Out:
+FileTable:
+Heap:
+
+-----------------------------------
+
+Garbage collector removed: 
+  (nothing)
+-----------------------------------
+
+Exe stack:
+string varf
+(varf=C:\Users\Gabriel Nasui\InteliJProjects\Lab3\src\test.in ; (openRFile(varf) ; (int varc ; (readFile(varf,varc) ; (print(varc) ; (readFile(varf,varc) ; (print(varc) ; closeRFile(varf))))))))
+SymTable:
+Out:
+FileTable:
+Heap:
+
+-----------------------------------
+
+Exe stack:
+(varf=C:\Users\Gabriel Nasui\InteliJProjects\Lab3\src\test.in ; (openRFile(varf) ; (int varc ; (readFile(varf,varc) ; (print(varc) ; (readFile(varf,varc) ; (print(varc) ; closeRFile(varf))))))))
+SymTable:
+varf --> 
+Out:
+FileTable:
+Heap:
+
+-----------------------------------
+
+Garbage collector removed: 
+  (nothing)
+-----------------------------------
+
+Exe stack:
+(varf=C:\Users\Gabriel Nasui\InteliJProjects\Lab3\src\test.in ; (openRFile(varf) ; (int varc ; (readFile(varf,varc) ; (print(varc) ; (readFile(varf,varc) ; (print(varc) ; closeRFile(varf))))))))
+SymTable:
+varf --> 
+Out:
+FileTable:
+Heap:
+
+-----------------------------------
+
+Exe stack:
+varf=C:\Users\Gabriel Nasui\InteliJProjects\Lab3\src\test.in
+(openRFile(varf) ; (int varc ; (readFile(varf,varc) ; (print(varc) ; (readFile(varf,varc) ; (print(varc) ; closeRFile(varf)))))))
+SymTable:
+varf --> 
+Out:
+FileTable:
+Heap:
+
+-----------------------------------
+
+Garbage collector removed: 
+  (nothing)
+-----------------------------------
+
+Exe stack:
+varf=C:\Users\Gabriel Nasui\InteliJProjects\Lab3\src\test.in
+(openRFile(varf) ; (int varc ; (readFile(varf,varc) ; (print(varc) ; (readFile(varf,varc) ; (print(varc) ; closeRFile(varf)))))))
+SymTable:
+varf --> 
+Out:
+FileTable:
+Heap:
+
+-----------------------------------
+
+Exe stack:
+(openRFile(varf) ; (int varc ; (readFile(varf,varc) ; (print(varc) ; (readFile(varf,varc) ; (print(varc) ; closeRFile(varf)))))))
+SymTable:
+varf --> C:\Users\Gabriel Nasui\InteliJProjects\Lab3\src\test.in
+Out:
+FileTable:
+Heap:
+
+-----------------------------------
+
+Garbage collector removed: 
+  (nothing)
+-----------------------------------
+
+Exe stack:
+(openRFile(varf) ; (int varc ; (readFile(varf,varc) ; (print(varc) ; (readFile(varf,varc) ; (print(varc) ; closeRFile(varf)))))))
+SymTable:
+varf --> C:\Users\Gabriel Nasui\InteliJProjects\Lab3\src\test.in
+Out:
+FileTable:
+Heap:
+
+-----------------------------------
+
+Exe stack:
+openRFile(varf)
+(int varc ; (readFile(varf,varc) ; (print(varc) ; (readFile(varf,varc) ; (print(varc) ; closeRFile(varf))))))
+SymTable:
+varf --> C:\Users\Gabriel Nasui\InteliJProjects\Lab3\src\test.in
+Out:
+FileTable:
+Heap:
+
+-----------------------------------
+
+Garbage collector removed: 
+  (nothing)
+-----------------------------------
+
+Exe stack:
+openRFile(varf)
+(int varc ; (readFile(varf,varc) ; (print(varc) ; (readFile(varf,varc) ; (print(varc) ; closeRFile(varf))))))
+SymTable:
+varf --> C:\Users\Gabriel Nasui\InteliJProjects\Lab3\src\test.in
+Out:
+FileTable:
+Heap:
+
+-----------------------------------
+
+Exe stack:
+(int varc ; (readFile(varf,varc) ; (print(varc) ; (readFile(varf,varc) ; (print(varc) ; closeRFile(varf))))))
+SymTable:
+varf --> C:\Users\Gabriel Nasui\InteliJProjects\Lab3\src\test.in
+Out:
+FileTable:
+C:\Users\Gabriel Nasui\InteliJProjects\Lab3\src\test.in
+Heap:
+
+-----------------------------------
+
+Garbage collector removed: 
+  (nothing)
+-----------------------------------
+
+Exe stack:
+(int varc ; (readFile(varf,varc) ; (print(varc) ; (readFile(varf,varc) ; (print(varc) ; closeRFile(varf))))))
+SymTable:
+varf --> C:\Users\Gabriel Nasui\InteliJProjects\Lab3\src\test.in
+Out:
+FileTable:
+C:\Users\Gabriel Nasui\InteliJProjects\Lab3\src\test.in
+Heap:
+
+-----------------------------------
+
+Exe stack:
+int varc
+(readFile(varf,varc) ; (print(varc) ; (readFile(varf,varc) ; (print(varc) ; closeRFile(varf)))))
+SymTable:
+varf --> C:\Users\Gabriel Nasui\InteliJProjects\Lab3\src\test.in
+Out:
+FileTable:
+C:\Users\Gabriel Nasui\InteliJProjects\Lab3\src\test.in
+Heap:
+
+-----------------------------------
+
+Garbage collector removed: 
+  (nothing)
+-----------------------------------
+
+Exe stack:
+int varc
+(readFile(varf,varc) ; (print(varc) ; (readFile(varf,varc) ; (print(varc) ; closeRFile(varf)))))
+SymTable:
+varf --> C:\Users\Gabriel Nasui\InteliJProjects\Lab3\src\test.in
+Out:
+FileTable:
+C:\Users\Gabriel Nasui\InteliJProjects\Lab3\src\test.in
+Heap:
+
+-----------------------------------
+
+Exe stack:
+(readFile(varf,varc) ; (print(varc) ; (readFile(varf,varc) ; (print(varc) ; closeRFile(varf)))))
+SymTable:
+varf --> C:\Users\Gabriel Nasui\InteliJProjects\Lab3\src\test.in
+varc --> 0
+Out:
+FileTable:
+C:\Users\Gabriel Nasui\InteliJProjects\Lab3\src\test.in
+Heap:
+
+-----------------------------------
+
+Garbage collector removed: 
+  (nothing)
+-----------------------------------
+
+Exe stack:
+(readFile(varf,varc) ; (print(varc) ; (readFile(varf,varc) ; (print(varc) ; closeRFile(varf)))))
+SymTable:
+varf --> C:\Users\Gabriel Nasui\InteliJProjects\Lab3\src\test.in
+varc --> 0
+Out:
+FileTable:
+C:\Users\Gabriel Nasui\InteliJProjects\Lab3\src\test.in
+Heap:
+
+-----------------------------------
+
+Exe stack:
+readFile(varf,varc)
+(print(varc) ; (readFile(varf,varc) ; (print(varc) ; closeRFile(varf))))
+SymTable:
+varf --> C:\Users\Gabriel Nasui\InteliJProjects\Lab3\src\test.in
+varc --> 0
+Out:
+FileTable:
+C:\Users\Gabriel Nasui\InteliJProjects\Lab3\src\test.in
+Heap:
+
+-----------------------------------
+
+Garbage collector removed: 
+  (nothing)
+-----------------------------------
+
+Exe stack:
+readFile(varf,varc)
+(print(varc) ; (readFile(varf,varc) ; (print(varc) ; closeRFile(varf))))
+SymTable:
+varf --> C:\Users\Gabriel Nasui\InteliJProjects\Lab3\src\test.in
+varc --> 0
+Out:
+FileTable:
+C:\Users\Gabriel Nasui\InteliJProjects\Lab3\src\test.in
+Heap:
+
+-----------------------------------
+
+Exe stack:
+(print(varc) ; (readFile(varf,varc) ; (print(varc) ; closeRFile(varf))))
+SymTable:
+varf --> C:\Users\Gabriel Nasui\InteliJProjects\Lab3\src\test.in
+varc --> 0
+Out:
+FileTable:
+C:\Users\Gabriel Nasui\InteliJProjects\Lab3\src\test.in
+Heap:
+
+-----------------------------------
+
+Garbage collector removed: 
+  (nothing)
+-----------------------------------
+
+Exe stack:
+(print(varc) ; (readFile(varf,varc) ; (print(varc) ; closeRFile(varf))))
+SymTable:
+varf --> C:\Users\Gabriel Nasui\InteliJProjects\Lab3\src\test.in
+varc --> 0
+Out:
+FileTable:
+C:\Users\Gabriel Nasui\InteliJProjects\Lab3\src\test.in
+Heap:
+
+-----------------------------------
+
+Exe stack:
+print(varc)
+(readFile(varf,varc) ; (print(varc) ; closeRFile(varf)))
+SymTable:
+varf --> C:\Users\Gabriel Nasui\InteliJProjects\Lab3\src\test.in
+varc --> 0
+Out:
+FileTable:
+C:\Users\Gabriel Nasui\InteliJProjects\Lab3\src\test.in
+Heap:
+
+-----------------------------------
+
+Garbage collector removed: 
+  (nothing)
+-----------------------------------
+
+Exe stack:
+print(varc)
+(readFile(varf,varc) ; (print(varc) ; closeRFile(varf)))
+SymTable:
+varf --> C:\Users\Gabriel Nasui\InteliJProjects\Lab3\src\test.in
+varc --> 0
+Out:
+FileTable:
+C:\Users\Gabriel Nasui\InteliJProjects\Lab3\src\test.in
+Heap:
+
+-----------------------------------
+
+Exe stack:
+(readFile(varf,varc) ; (print(varc) ; closeRFile(varf)))
+SymTable:
+varf --> C:\Users\Gabriel Nasui\InteliJProjects\Lab3\src\test.in
+varc --> 0
+Out:
+0
+FileTable:
+C:\Users\Gabriel Nasui\InteliJProjects\Lab3\src\test.in
+Heap:
+
+-----------------------------------
+
+Garbage collector removed: 
+  (nothing)
+-----------------------------------
+
+Exe stack:
+(readFile(varf,varc) ; (print(varc) ; closeRFile(varf)))
+SymTable:
+varf --> C:\Users\Gabriel Nasui\InteliJProjects\Lab3\src\test.in
+varc --> 0
+Out:
+0
+FileTable:
+C:\Users\Gabriel Nasui\InteliJProjects\Lab3\src\test.in
+Heap:
+
+-----------------------------------
+
+Exe stack:
+readFile(varf,varc)
+(print(varc) ; closeRFile(varf))
+SymTable:
+varf --> C:\Users\Gabriel Nasui\InteliJProjects\Lab3\src\test.in
+varc --> 0
+Out:
+0
+FileTable:
+C:\Users\Gabriel Nasui\InteliJProjects\Lab3\src\test.in
+Heap:
+
+-----------------------------------
+
+Garbage collector removed: 
+  (nothing)
+-----------------------------------
+
+Exe stack:
+readFile(varf,varc)
+(print(varc) ; closeRFile(varf))
+SymTable:
+varf --> C:\Users\Gabriel Nasui\InteliJProjects\Lab3\src\test.in
+varc --> 0
+Out:
+0
+FileTable:
+C:\Users\Gabriel Nasui\InteliJProjects\Lab3\src\test.in
+Heap:
+
+-----------------------------------
+
+Exe stack:
+(print(varc) ; closeRFile(varf))
+SymTable:
+varf --> C:\Users\Gabriel Nasui\InteliJProjects\Lab3\src\test.in
+varc --> 0
+Out:
+0
+FileTable:
+C:\Users\Gabriel Nasui\InteliJProjects\Lab3\src\test.in
+Heap:
+
+-----------------------------------
+
+Garbage collector removed: 
+  (nothing)
+-----------------------------------
+
+Exe stack:
+(print(varc) ; closeRFile(varf))
+SymTable:
+varf --> C:\Users\Gabriel Nasui\InteliJProjects\Lab3\src\test.in
+varc --> 0
+Out:
+0
+FileTable:
+C:\Users\Gabriel Nasui\InteliJProjects\Lab3\src\test.in
+Heap:
+
+-----------------------------------
+
+Exe stack:
+print(varc)
+closeRFile(varf)
+SymTable:
+varf --> C:\Users\Gabriel Nasui\InteliJProjects\Lab3\src\test.in
+varc --> 0
+Out:
+0
+FileTable:
+C:\Users\Gabriel Nasui\InteliJProjects\Lab3\src\test.in
+Heap:
+
+-----------------------------------
+
+Garbage collector removed: 
+  (nothing)
+-----------------------------------
+
+Exe stack:
+print(varc)
+closeRFile(varf)
+SymTable:
+varf --> C:\Users\Gabriel Nasui\InteliJProjects\Lab3\src\test.in
+varc --> 0
+Out:
+0
+FileTable:
+C:\Users\Gabriel Nasui\InteliJProjects\Lab3\src\test.in
+Heap:
+
+-----------------------------------
+
+Exe stack:
+closeRFile(varf)
+SymTable:
+varf --> C:\Users\Gabriel Nasui\InteliJProjects\Lab3\src\test.in
+varc --> 0
+Out:
+0
+0
+FileTable:
+C:\Users\Gabriel Nasui\InteliJProjects\Lab3\src\test.in
+Heap:
+
+-----------------------------------
+
+Garbage collector removed: 
+  (nothing)
+-----------------------------------
+
+Exe stack:
+closeRFile(varf)
+SymTable:
+varf --> C:\Users\Gabriel Nasui\InteliJProjects\Lab3\src\test.in
+varc --> 0
+Out:
+0
+0
+FileTable:
+C:\Users\Gabriel Nasui\InteliJProjects\Lab3\src\test.in
+Heap:
+
+-----------------------------------
+
+Exe stack:
+SymTable:
+varf --> C:\Users\Gabriel Nasui\InteliJProjects\Lab3\src\test.in
+varc --> 0
+Out:
+0
+0
+FileTable:
+Heap:
+
+-----------------------------------
+
+Garbage collector removed: 
+  (nothing)
+-----------------------------------
+
+Exe stack:
+SymTable:
+varf --> C:\Users\Gabriel Nasui\InteliJProjects\Lab3\src\test.in
+varc --> 0
+Out:
+0
+0
+FileTable:
+Heap:
+
+-----------------------------------
+
