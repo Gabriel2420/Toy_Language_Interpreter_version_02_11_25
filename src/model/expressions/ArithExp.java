@@ -3,6 +3,7 @@ package model.expressions;
 import exceptions.MyException;
 import model.adt.MyIDictionary;
 import model.adt.MyIDictionaryHeap;
+import model.types.IType;
 import model.types.IntType;
 import model.values.IValue;
 import model.values.IntValue;
@@ -60,5 +61,17 @@ public class ArithExp implements IExp{
     @Override
     public IExp deepCopy() {
         return new ArithExp(this.exp1.deepCopy(),this.exp2.deepCopy(),operation);
+    }
+
+    @Override
+    public IType typecheck(MyIDictionary<String, IType> typeEnv) throws MyException {
+        IType type1, type2;
+        type1 = exp1.typecheck(typeEnv);
+        type2 = exp2.typecheck(typeEnv);
+        if (type1.equals(new IntType())) {
+            if (type2.equals(new IntType())) return new IntType();
+            else throw new MyException("Second operand is not an integer!");
+        }
+        else throw new MyException("First operand is not an integer!");
     }
 }

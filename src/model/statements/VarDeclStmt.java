@@ -29,6 +29,12 @@ public class VarDeclStmt implements IStmt {
     }
 
     @Override
+    public MyIDictionary<String, IType> typecheck(MyIDictionary<String, IType> typeEnv) throws MyException {
+        typeEnv.put(this.id, this.type);
+        return typeEnv;
+    }
+
+    @Override
     public PrgState execute(PrgState state) throws MyException {
         MyIDictionary<String, IValue> symTable = state.getSymTable();
         if(!symTable.isDefined(this.id)){

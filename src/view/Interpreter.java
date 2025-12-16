@@ -1,6 +1,7 @@
 package view;
 
 import controller.Controller;
+import exceptions.MyException;
 import model.PrgState;
 import model.adt.MyDictionary;
 import model.adt.MyDictionaryHeap;
@@ -8,10 +9,7 @@ import model.adt.MyList;
 import model.adt.MyStack;
 import model.expressions.*;
 import model.statements.*;
-import model.types.BoolType;
-import model.types.IntType;
-import model.types.RefType;
-import model.types.StringType;
+import model.types.*;
 import model.values.BoolValue;
 import model.values.IntValue;
 import model.values.StringValue;
@@ -20,10 +18,10 @@ import repository.Repo;
 import view.command.ExitCommand;
 import view.command.RunExample;
 
-import java.nio.channels.NonWritableChannelException;
 
 public class Interpreter {
     public static void main(String[] args) {
+        TextMenu menu = new TextMenu();
         IStmt ex1 = new CompStmt(
                 new VarDeclStmt("v", new IntType()),
                 new CompStmt(
@@ -31,10 +29,7 @@ public class Interpreter {
                         new PrintStmt(new VarExp("v"))
                 )
         );
-
-        PrgState prg1 = new PrgState(new MyStack<>(), new MyDictionary<>(), new MyList<>(), new MyDictionary<>(), new MyDictionaryHeap(), ex1);
-        IRepo repo1 = new Repo(prg1,"log1.txt");
-        Controller controller1 = new Controller(repo1);
+        addProgram(menu, "1", ex1, "log1.txt");
 
         IStmt ex2 = new CompStmt(
                 new VarDeclStmt("a", new IntType()),
@@ -59,10 +54,7 @@ public class Interpreter {
                         )
                 )
         );
-
-        PrgState prg2 = new PrgState(new MyStack<>(), new MyDictionary<>(), new MyList<>(), new MyDictionary<>(), new MyDictionaryHeap(), ex2);
-        IRepo repo2 = new Repo(prg2,"log2.txt");
-        Controller controller2 = new Controller(repo2);
+        addProgram(menu, "2", ex2, "log2.txt");
 
         IStmt ex3 = new CompStmt(
                 new VarDeclStmt("a", new BoolType()),
@@ -81,10 +73,7 @@ public class Interpreter {
                         )
                 )
         );
-
-        PrgState prg3 = new PrgState(new MyStack<>(), new MyDictionary<>(), new MyList<>(), new MyDictionary<>(), new MyDictionaryHeap(), ex3);
-        IRepo repo3 = new Repo(prg3,"log3.txt");
-        Controller controller3 = new Controller(repo3);
+        addProgram(menu, "3", ex3, "log3.txt");
 
         IStmt testExample = new CompStmt(
                 new VarDeclStmt("varf", new StringType()), // string varf;
@@ -111,10 +100,7 @@ public class Interpreter {
                         )
                 )
         );
-
-        PrgState prg4 = new PrgState(new MyStack<>(), new MyDictionary<>(), new MyList<>(), new MyDictionary<>(), new MyDictionaryHeap(), testExample);
-        IRepo repo4 = new Repo(prg4,"logTest.txt");
-        Controller controller4 = new Controller(repo4);
+        addProgram(menu, "4", testExample, "logTest.txt");
 
         IStmt heapAllocExample = new CompStmt(
                 new VarDeclStmt("v", new RefType(new IntType())),
@@ -129,10 +115,7 @@ public class Interpreter {
                         )
                 )
         );
-
-        PrgState prg5 = new PrgState(new MyStack<>(), new MyDictionary<>(), new MyList<>(), new MyDictionary<>(), new MyDictionaryHeap(), heapAllocExample);
-        IRepo repo5 = new Repo(prg5,"log5.txt");
-        Controller controller5 = new Controller(repo5);
+        addProgram(menu, "5", heapAllocExample, "log5.txt");
 
         IStmt heapReadingExample = new CompStmt(
                 new VarDeclStmt("v",new RefType(new IntType())),
@@ -150,10 +133,7 @@ public class Interpreter {
                         )
                 )
         );
-
-        PrgState prg6 = new PrgState(new MyStack<>(), new MyDictionary<>(), new MyList<>(), new MyDictionary<>(), new MyDictionaryHeap(), heapReadingExample);
-        IRepo repo6 = new Repo(prg6, "log6.txt");
-        Controller controller6 = new Controller(repo6);
+        addProgram(menu, "6", heapReadingExample, "log6.txt");
 
         IStmt heapWritingExample = new CompStmt(
                 new VarDeclStmt("v", new RefType(new IntType())),
@@ -168,10 +148,7 @@ public class Interpreter {
                         )
                 )
         );
-
-        PrgState prg7 = new PrgState(new MyStack<>(), new MyDictionary<>(), new MyList<>(), new MyDictionary<>(), new MyDictionaryHeap(), heapWritingExample);
-        IRepo repo7 = new Repo(prg7, "log7.txt");
-        Controller controller7 = new Controller(repo7);
+        addProgram(menu, "7", heapWritingExample, "log7.txt");
 
         IStmt whileStmtExample = new CompStmt(
                 new VarDeclStmt("v", new IntType()),
@@ -185,10 +162,7 @@ public class Interpreter {
                         )
                 )
         );
-
-        PrgState prg8 = new PrgState(new MyStack<>(), new MyDictionary<>(), new MyList<>(), new MyDictionary<>(), new MyDictionaryHeap(), whileStmtExample);
-        IRepo repo8 = new Repo(prg8, "log8.txt");
-        Controller controller8 = new Controller(repo8);
+        addProgram(menu, "8", whileStmtExample, "log8.txt");
 
         IStmt garbageCollectorExample = new CompStmt(
                 new VarDeclStmt("v", new RefType(new IntType())),
@@ -206,13 +180,9 @@ public class Interpreter {
                         )
                 )
         );
-
-        PrgState prg9 = new PrgState(new MyStack<>(), new MyDictionary<>(), new MyList<>(), new MyDictionary<>(), new MyDictionaryHeap(),garbageCollectorExample);
-        IRepo repo9 = new Repo(prg9, "log9.txt");
-        Controller controller9 = new Controller(repo9);
+        addProgram(menu, "9", garbageCollectorExample, "log9.txt");
 
         IStmt deepRefGarbageCollector = new CompStmt(
-                // 1. Declare the variables with increasing reference depth
                 new VarDeclStmt("r1", new RefType(new IntType())),
                 new CompStmt(
                         new VarDeclStmt("r2", new RefType(new RefType(new IntType()))),
@@ -221,31 +191,20 @@ public class Interpreter {
                                 new CompStmt(
                                         new VarDeclStmt("r4", new RefType(new RefType(new RefType(new RefType(new IntType()))))),
                                         new CompStmt(
-                                                // 2. Build the chain in the Heap
-                                                // Heap: Addr1(100)
                                                 new NewStmt("r1", new ValueExp(new IntValue(100))),
                                                 new CompStmt(
-                                                        // Heap: Addr2 -> Addr1
                                                         new NewStmt("r2", new VarExp("r1")),
                                                         new CompStmt(
-                                                                // Heap: Addr3 -> Addr2
                                                                 new NewStmt("r3", new VarExp("r2")),
                                                                 new CompStmt(
-                                                                        // Heap: Addr4 -> Addr3
                                                                         new NewStmt("r4", new VarExp("r3")),
                                                                         new CompStmt(
-                                                                                // 3. CHANGE r1, r2, r3 to point to something new.
-                                                                                // Now, the old chain (Addr1, Addr2, Addr3) is ONLY held together
-                                                                                // by 'r4' (which points to Addr4).
                                                                                 new NewStmt("r1", new ValueExp(new IntValue(999))),
                                                                                 new CompStmt(
                                                                                         new NewStmt("r2", new VarExp("r1")),
                                                                                         new CompStmt(
                                                                                                 new NewStmt("r3", new VarExp("r2")),
                                                                                                 new CompStmt(
-                                                                                                        // 4. THE KILL SWITCH
-                                                                                                        // We overwrite 'r4'. Now NOTHING points to the old Addr4.
-                                                                                                        // Because Addr4 is gone, Addr3 is gone, etc.
                                                                                                         new NewStmt("r4", new VarExp("r3")),
                                                                                                         new PrintStmt(new ReadHeapExp(
                                                                                                                 new ReadHeapExp(
@@ -264,23 +223,27 @@ public class Interpreter {
                         )
                 )
         );
+        addProgram(menu, "10", deepRefGarbageCollector, "log10.txt");
 
-        PrgState prg10 = new PrgState(new MyStack<>(), new MyDictionary<>(), new MyList<>(), new MyDictionary<>(), new MyDictionaryHeap(), deepRefGarbageCollector);
-        IRepo repo10 = new Repo(prg10, "log10.txt");
-        Controller controller10 = new Controller(repo10);
-
-        TextMenu menu = new TextMenu();
         menu.addCommand(new ExitCommand("0","exit"));
-        menu.addCommand(new RunExample("1", ex1.toString(), controller1));
-        menu.addCommand(new RunExample("2", ex2.toString(), controller2));
-        menu.addCommand(new RunExample("3", ex3.toString(), controller3));
-        menu.addCommand(new RunExample("4", testExample.toString(), controller4));
-        menu.addCommand(new RunExample("5", heapAllocExample.toString(), controller5));
-        menu.addCommand(new RunExample("6", heapReadingExample.toString(), controller6));
-        menu.addCommand(new RunExample("7", heapWritingExample.toString(), controller7));
-        menu.addCommand(new RunExample("8", whileStmtExample.toString(), controller8));
-        menu.addCommand(new RunExample("9", garbageCollectorExample.toString(), controller9));
-        menu.addCommand(new RunExample("10", deepRefGarbageCollector.toString(), controller10));
         menu.show();
+    }
+
+    private static void addProgram(TextMenu menu, String key, IStmt stmt, String logFilePath) {
+        try {
+            MyDictionary<String, IType> typeEnv = new MyDictionary<>();
+            stmt.typecheck(typeEnv);
+
+            PrgState prg = new PrgState(new MyStack<>(), new MyDictionary<>(), new MyList<>(), new MyDictionary<>(), new MyDictionaryHeap(), stmt);
+            IRepo repo = new Repo(prg, logFilePath);
+            Controller controller = new Controller(repo);
+
+            menu.addCommand(new RunExample(key, stmt.toString(), controller));
+        } catch (MyException | RuntimeException e) {
+            System.out.println("------------------------------------------------------");
+            System.out.println("ERROR: Example " + key + " failed type checking!");
+            System.out.println("Reason: " + e.getMessage());
+            System.out.println("------------------------------------------------------");
+        }
     }
 }

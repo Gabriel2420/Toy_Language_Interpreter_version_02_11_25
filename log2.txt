@@ -1,0 +1,144 @@
+Exe stack:
+(int a ; (int b ; (a=2+3*5 ; (b=a+1 ; print(b)))))
+SymTable:
+Out:
+FileTable:
+Heap:
+
+-----------------------------------
+
+Garbage collector removed: 
+  (nothing)
+-----------------------------------
+
+Exe stack:
+int a
+(int b ; (a=2+3*5 ; (b=a+1 ; print(b))))
+SymTable:
+Out:
+FileTable:
+Heap:
+
+-----------------------------------
+
+Garbage collector removed: 
+  (nothing)
+-----------------------------------
+
+Exe stack:
+(int b ; (a=2+3*5 ; (b=a+1 ; print(b))))
+SymTable:
+a --> 0
+Out:
+FileTable:
+Heap:
+
+-----------------------------------
+
+Garbage collector removed: 
+  (nothing)
+-----------------------------------
+
+Exe stack:
+int b
+(a=2+3*5 ; (b=a+1 ; print(b)))
+SymTable:
+a --> 0
+Out:
+FileTable:
+Heap:
+
+-----------------------------------
+
+Garbage collector removed: 
+  (nothing)
+-----------------------------------
+
+Exe stack:
+(a=2+3*5 ; (b=a+1 ; print(b)))
+SymTable:
+a --> 0
+b --> 0
+Out:
+FileTable:
+Heap:
+
+-----------------------------------
+
+Garbage collector removed: 
+  (nothing)
+-----------------------------------
+
+Exe stack:
+a=2+3*5
+(b=a+1 ; print(b))
+SymTable:
+a --> 0
+b --> 0
+Out:
+FileTable:
+Heap:
+
+-----------------------------------
+
+Garbage collector removed: 
+  (nothing)
+-----------------------------------
+
+Exe stack:
+(b=a+1 ; print(b))
+SymTable:
+a --> 17
+b --> 0
+Out:
+FileTable:
+Heap:
+
+-----------------------------------
+
+Garbage collector removed: 
+  (nothing)
+-----------------------------------
+
+Exe stack:
+b=a+1
+print(b)
+SymTable:
+a --> 17
+b --> 0
+Out:
+FileTable:
+Heap:
+
+-----------------------------------
+
+Garbage collector removed: 
+  (nothing)
+-----------------------------------
+
+Exe stack:
+print(b)
+SymTable:
+a --> 17
+b --> 18
+Out:
+FileTable:
+Heap:
+
+-----------------------------------
+
+Garbage collector removed: 
+  (nothing)
+-----------------------------------
+
+Exe stack:
+SymTable:
+a --> 17
+b --> 18
+Out:
+18
+FileTable:
+Heap:
+
+-----------------------------------
+

@@ -2,7 +2,9 @@ package model.statements;
 
 import exceptions.MyException;
 import model.PrgState;
+import model.adt.MyIDictionary;
 import model.expressions.IExp;
+import model.types.IType;
 import model.types.IntType;
 import model.types.StringType;
 import model.values.IValue;
@@ -16,8 +18,8 @@ public class ReadFile implements IStmt{
     private IExp exp;
     private String varName;
 
-    public ReadFile(IExp exp1, String varName) {
-        this.exp = exp1;
+    public ReadFile(IExp exp, String varName) {
+        this.exp = exp;
         this.varName = varName;
     }
 
@@ -67,6 +69,21 @@ public class ReadFile implements IStmt{
     @Override
     public IStmt deepCopy() {
         return new ReadFile(this.exp.deepCopy(), this.varName);
+    }
+
+    @Override
+    public MyIDictionary<String, IType> typecheck(MyIDictionary<String, IType> typeEnv) throws MyException {
+        IType typeExp = exp.typecheck(typeEnv);
+        IType typeVar = typeEnv.getValue(varName);
+
+        if (!typeExp.equals(new StringType())) {
+            throw new MyException("ReadFile statement: The file name expression is not a StringType!");
+        }
+
+        if (!typeVar.equals(new IntType())) {
+            throw new MyException("ReadFile statement: The variable " + varName + " is not of type IntType!");
+        }
+        return typeEnv;
     }
 
     @Override

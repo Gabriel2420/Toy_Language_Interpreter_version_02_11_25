@@ -2,7 +2,9 @@ package model.statements;
 
 import exceptions.MyException;
 import model.PrgState;
+import model.adt.MyIDictionary;
 import model.expressions.IExp;
+import model.types.IType;
 import model.types.StringType;
 import model.values.IValue;
 import model.values.StringValue;
@@ -40,6 +42,16 @@ public class OpenRFile implements IStmt{
     @Override
     public IStmt deepCopy() {
         return new OpenRFile(this.exp.deepCopy());
+    }
+
+    @Override
+    public MyIDictionary<String, IType> typecheck(MyIDictionary<String, IType> typeEnv) throws MyException {
+        IType typeExp = exp.typecheck(typeEnv);
+
+        if(typeExp.equals(new StringType())) {
+            return typeEnv;
+        }
+        else throw new MyException("OpenRFile stmt: The file name expression is not a StringType!");
     }
 
     @Override

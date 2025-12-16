@@ -2,9 +2,11 @@ package model.statements;
 
 import exceptions.MyException;
 import model.PrgState;
+import model.adt.MyIDictionary;
 import model.adt.MyIStack;
 import model.expressions.IExp;
 import model.types.BoolType;
+import model.types.IType;
 import model.values.BoolValue;
 import model.values.IValue;
 
@@ -28,6 +30,17 @@ public class IfStmt implements IStmt{
     @Override
     public IStmt deepCopy() {
         return new IfStmt(this.exp.deepCopy(), this.thenStmt.deepCopy(), this.elseStmt.deepCopy());
+    }
+
+    @Override
+    public MyIDictionary<String, IType> typecheck(MyIDictionary<String, IType> typeEnv) throws MyException {
+        IType typeExp = exp.typecheck(typeEnv);
+        if(typeExp.equals(new BoolType())) {
+            thenStmt.typecheck(typeEnv.clone());
+            elseStmt.typecheck(typeEnv.clone());
+            return typeEnv;
+        }
+        else throw new MyException("The condition of IF has not the type bool...");
     }
 
     @Override

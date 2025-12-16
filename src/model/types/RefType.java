@@ -25,7 +25,7 @@ public class RefType  implements IType{
         return new RefType(inner.deepCopy());
     }
 
-    IType getInner() {
+    public IType getInner() {
         return this.inner;
     }
     @Override

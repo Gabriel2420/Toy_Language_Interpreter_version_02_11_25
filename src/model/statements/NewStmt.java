@@ -2,8 +2,10 @@ package model.statements;
 
 import exceptions.MyException;
 import model.PrgState;
+import model.adt.MyIDictionary;
 import model.expressions.IExp;
 import model.types.IType;
+import model.types.RefType;
 import model.values.IValue;
 import model.values.RefValue;
 
@@ -41,6 +43,16 @@ public class NewStmt implements IStmt{
     @Override
     public IStmt deepCopy() {
         return new NewStmt(this.varName,this.exp.deepCopy());
+    }
+
+    @Override
+    public MyIDictionary<String, IType> typecheck(MyIDictionary<String, IType> typeEnv) throws MyException {
+        IType typeVar = typeEnv.getValue(varName);
+        IType typeExp = exp.typecheck(typeEnv);
+        if(typeVar.equals(new RefType(typeExp))) {
+            return typeEnv;
+        }
+        else throw new MyException("New stmt: right hand side and left hand side have different types");
     }
 
     @Override

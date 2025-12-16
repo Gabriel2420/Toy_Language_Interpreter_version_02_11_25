@@ -4,6 +4,7 @@ import exceptions.MyException;
 import model.PrgState;
 import model.adt.MyIDictionary;
 import model.adt.MyIStack;
+import model.types.IType;
 
 public class CompStmt implements IStmt{
     private final IStmt first;
@@ -22,6 +23,11 @@ public class CompStmt implements IStmt{
     @Override
     public IStmt deepCopy() {
         return new CompStmt(this.first.deepCopy(), this.second.deepCopy());
+    }
+
+    @Override
+    public MyIDictionary<String, IType> typecheck(MyIDictionary<String, IType> typeEnv) throws MyException {
+        return second.typecheck(first.typecheck(typeEnv));
     }
 
     @Override

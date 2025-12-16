@@ -1,10 +1,8 @@
 package model.statements;
 
-import com.sun.jdi.Value;
 import exceptions.MyException;
 import model.PrgState;
 import model.adt.MyIDictionary;
-import model.adt.MyIStack;
 import model.expressions.IExp;
 import model.types.IType;
 import model.values.IValue;
@@ -29,6 +27,14 @@ public class AssignStmt  implements IStmt{
     }
 
     @Override
+    public MyIDictionary<String, IType> typecheck(MyIDictionary<String, IType> typeEnv) throws MyException {
+        IType typeVar = typeEnv.getValue(id);
+        IType typeExp = exp.typecheck(typeEnv);
+        if(typeVar.equals(typeExp)) return typeEnv;
+        else throw new MyException("Assignment: right hand side and left hand side have different types!");
+    }
+
+    @Override
     public PrgState execute(PrgState state) throws MyException {
         MyIDictionary<String, IValue> symTbl = state.getSymTable();
 
@@ -38,9 +44,9 @@ public class AssignStmt  implements IStmt{
             if(value.getType().equals(typeID)){
                 symTbl.put(id,value);
             }
-            else throw new MyException("Declared type of variable" + id + "and type of the assigned expression do not match");
+            else throw new MyException("Declared type of variable " + id + " and type of the assigned expression do not match");
         }
-        else throw new MyException("The used variable" + id + "was not declared before");
+        else throw new MyException("The used variable " + id + " was not declared before");
         return state;
     }
 }
