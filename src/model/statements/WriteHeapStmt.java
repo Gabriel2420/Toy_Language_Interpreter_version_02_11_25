@@ -39,7 +39,7 @@ public class WriteHeapStmt implements IStmt{
             throw new MyException("Type mismatch!");
         }
         state.getHeap().put(refValue.getAddress(), expValue);
-        return state;
+        return null;
     }
 
     @Override

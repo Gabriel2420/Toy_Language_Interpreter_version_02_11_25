@@ -1,5 +1,6 @@
 package model;
 
+import exceptions.MyException;
 import model.adt.MyIDictionary;
 import model.adt.MyIDictionaryHeap;
 import model.adt.MyIList;
@@ -18,6 +19,12 @@ public class PrgState {
     private MyIDictionary<StringValue, BufferedReader> fileTable;
     private MyIDictionaryHeap heap;
     private IStmt originalProgram;
+    private int id;
+    private static int lastId = 0;
+
+    public synchronized static int getNewId() {
+        return ++lastId;
+    }
 
     public PrgState(MyIStack<IStmt> stack, MyIDictionary<String, IValue> symTable, MyIList<IValue> out,MyIDictionary<StringValue,BufferedReader>fileTable, MyIDictionaryHeap heap, IStmt program){
         this.exeStack = stack;
@@ -26,6 +33,7 @@ public class PrgState {
         this.fileTable = fileTable;
         this.heap = heap;
         this.originalProgram = program.deepCopy();
+        this.id = getNewId();
         stack.push(program);
     }
 
@@ -63,10 +71,26 @@ public class PrgState {
     public void setOriginalProgram(IStmt program) {
         this.originalProgram = program.deepCopy();
     }
+    public boolean isNotCompleted() {
+        return !(exeStack.isEmpty());
+    }
+    public PrgState oneStep() throws MyException {
+        if(exeStack.isEmpty())throw new MyException("PrgState stack is empty");
+        IStmt currentStmt = exeStack.pop();
+        return currentStmt.execute(this);
+    }
+    public int getId() {
+        return this.id;
+    }
 
     @Override
     public String toString(){
-        return "ExeStack: " + exeStack + "\n" + "SymTable: " + symTable + "\n"+"Out: " + out + "\n" + "File table: " + fileTable + "\n" + heap;
+        return  "Id: " + id + "\n" +
+                "ExeStack: " + exeStack + "\n" +
+                "SymTable: " + symTable + "\n" +
+                "Out: " + out + "\n" +
+                "File table: " + fileTable + "\n" +
+                "Heap: " + heap;
     }
 }
 

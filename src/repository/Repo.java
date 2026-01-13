@@ -14,7 +14,7 @@ import java.io.PrintWriter;
 import java.util.*;
 
 public class Repo implements IRepo{
-    private final List<PrgState> program;
+    private List<PrgState> program;
     private final String logFilePath;
 
     public Repo(PrgState state,String logFilePath) {
@@ -24,14 +24,13 @@ public class Repo implements IRepo{
     }
 
     @Override
-    public void addPrg(PrgState state) {
-        this.program.add(state);
+    public List<PrgState> getPrgList() {
+        return program;
     }
 
     @Override
-    public PrgState getCrtPrg() throws MyException{
-       if(program.isEmpty()) throw new MyException("The program is empty...");
-       else return program.get(program.size() - 1);
+    public void setPrgList(List<PrgState> prgStateList) {
+        this.program = prgStateList;
     }
 
     @Override
@@ -50,12 +49,14 @@ public class Repo implements IRepo{
     }
 
     @Override
-    public void logPrgStateExec() throws MyException {
-        PrgState state = this.getCrtPrg();
+    public void logPrgStateExec(PrgState state) throws MyException {
         try (PrintWriter logFile = new PrintWriter(new BufferedWriter(new FileWriter(logFilePath, true))))
         {
+            logFile.println("Id:");
+            logFile.println(state.getId());
+
             logFile.println("Exe stack:");
-            List<IStmt> stackContent = state.getExeStack().getContent();
+            List<IStmt> stackContent = new ArrayList<>(state.getExeStack().getContent());
             Collections.reverse(stackContent);
             for(IStmt stmt : stackContent) {
                 logFile.println(stmt.toString());

@@ -37,7 +37,7 @@ public class PrintStmt implements IStmt{
         MyIList<IValue> out = state.getOut();
         IValue value = exp.eval(state.getSymTable(), state.getHeap());
         out.add(value);
-        return state;
+        return null;
 
     }
 }

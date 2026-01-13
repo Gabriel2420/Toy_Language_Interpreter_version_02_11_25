@@ -63,7 +63,7 @@ public class ReadFile implements IStmt{
         } catch (IOException e) {
             throw new MyException(e.getMessage());
         }
-        return state;
+        return null;
     }
 
     @Override

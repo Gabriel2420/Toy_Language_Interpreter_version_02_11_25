@@ -43,6 +43,6 @@ public class VarDeclStmt implements IStmt {
         else
             throw new MyException("This variable is already defined");
 
-        return state;
+        return null;
     }
 }

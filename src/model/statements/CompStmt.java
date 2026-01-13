@@ -35,6 +35,6 @@ public class CompStmt implements IStmt{
         MyIStack<IStmt> stack = state.getExeStack();
         stack.push(second);
         stack.push(first);
-        return state;
+        return null;
     }
 }

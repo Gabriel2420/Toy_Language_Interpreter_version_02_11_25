@@ -54,6 +54,6 @@ public class IfStmt implements IStmt{
         if(cond.getBool())
             stk.push(thenStmt);
         else stk.push(elseStmt);
-        return state;
+        return null;
     }
 }

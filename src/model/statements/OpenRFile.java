@@ -36,7 +36,7 @@ public class OpenRFile implements IStmt{
         } catch (FileNotFoundException e){
             throw new MyException(e.getMessage());
         }
-        return state;
+        return null;
     }
 
     @Override

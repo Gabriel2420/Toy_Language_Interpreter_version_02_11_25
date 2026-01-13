@@ -37,7 +37,7 @@ public class CloseRFile implements IStmt{
             throw new MyException(e.getMessage());
         }
         state.getFileTable().remove(fileNameValue,reader);
-        return state;
+        return null;
     }
 
     @Override

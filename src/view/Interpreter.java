@@ -225,6 +225,38 @@ public class Interpreter {
         );
         addProgram(menu, "10", deepRefGarbageCollector, "log10.txt");
 
+        IStmt threadsExample = new CompStmt(
+                new VarDeclStmt("v", new IntType()),
+                new CompStmt(
+                        new VarDeclStmt("a", new RefType(new IntType())),
+                        new CompStmt(
+                                new AssignStmt("v", new ValueExp(new IntValue(10))),
+                                new CompStmt(
+                                    new NewStmt("a", new ValueExp(new IntValue(22))),
+                                    new CompStmt(
+                                            new ForkStmt(
+                                                    new CompStmt(
+                                                            new WriteHeapStmt("a", new ValueExp(new IntValue(30))),
+                                                            new CompStmt(
+                                                                    new AssignStmt("v", new ValueExp(new IntValue(32))),
+                                                                    new CompStmt(
+                                                                            new PrintStmt(new VarExp("v")),
+                                                                            new PrintStmt(new ReadHeapExp(new VarExp("a")))
+                                                                    )
+                                                            )
+                                                    )
+                                            ),
+                                            new CompStmt(
+                                                    new PrintStmt(new VarExp("v")),
+                                                    new PrintStmt(new ReadHeapExp(new VarExp("a")))
+                                            )
+                                    )
+                                )
+                        )
+                )
+        );
+        addProgram(menu, "11", threadsExample, "log11.txt");
+
         menu.addCommand(new ExitCommand("0","exit"));
         menu.show();
     }
