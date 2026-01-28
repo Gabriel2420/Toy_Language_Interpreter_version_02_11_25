@@ -1,7 +1,16 @@
-package view;
+package gui;
 
 import controller.Controller;
 import exceptions.MyException;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.*;
+import javafx.stage.Stage;
 import model.PrgState;
 import model.adt.MyDictionary;
 import model.adt.MyDictionaryHeap;
@@ -15,13 +24,90 @@ import model.values.IntValue;
 import model.values.StringValue;
 import repository.IRepo;
 import repository.Repo;
-import view.command.ExitCommand;
-import view.command.RunExample;
 
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
-public class Interpreter {
-    public static void main(String[] args) {
-        TextMenu menu = new TextMenu();
+public class ProgramSelectorController {
+
+    @FXML
+    private ListView<IStmt> programListView;
+
+    @FXML
+    private Button runButton;
+
+    @FXML
+    public void initialize() {
+        // 1. Allow single selection only
+        programListView.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
+
+        // 2. Populate the list with the hardcoded examples
+        programListView.setItems(getAllStatements());
+
+        // 3. Set the button action
+        runButton.setOnAction(actionEvent -> {
+            IStmt selectedStmt = programListView.getSelectionModel().getSelectedItem();
+            if (selectedStmt == null) {
+                Alert alert = new Alert(Alert.AlertType.ERROR, "Please select a program!", ButtonType.OK);                alert.showAndWait();
+                return;
+            }
+
+            // 4. Try to launch the selected program
+            launchProgram(selectedStmt);
+        });
+    }
+
+    private void launchProgram(IStmt stmt) {
+        try {
+            // STEP 1: Perform Type Checking (Important!)
+            // We verify if the program is valid before creating the controller
+            MyDictionary<String, IType> typeEnv = new MyDictionary<>();
+            stmt.typecheck(typeEnv);
+
+            // STEP 2: Create the Backend Infrastructure
+            // This matches exactly what was inside your addProgram method in Interpreter.java
+            PrgState prgState = new PrgState(
+                    new MyStack<>(),
+                    new MyDictionary<>(),
+                    new MyList<>(),
+                    new MyDictionary<>(),
+                    new MyDictionaryHeap(),
+                    stmt
+            );
+
+            // Create a dynamic log file name so we don't overwrite the same file every time
+            String logFile = "log" + System.currentTimeMillis() + ".txt";
+            IRepo repo = new Repo(prgState, logFile);
+            Controller controller = new Controller(repo);
+
+            // STEP 3: Load the Executor Window
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("ProgramExecutor.fxml"));
+            Parent root = loader.load();
+
+            // STEP 4: Pass the Controller to the new Window
+            ProgramExecutorController executorController = loader.getController();
+            executorController.setController(controller);
+
+            // STEP 5: Show the Window
+            Stage stage = new Stage();
+            stage.setTitle("Program Executor");
+            stage.setScene(new Scene(root));
+            stage.show();
+
+        } catch (MyException | RuntimeException e) {
+            // If Type Check fails or other errors occur
+            Alert alert = new Alert(Alert.AlertType.ERROR, e.getMessage());
+            alert.showAndWait();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private ObservableList<IStmt> getAllStatements() {
+        List<IStmt> allStmts = new ArrayList<>();
+
+        // Example 1
         IStmt ex1 = new CompStmt(
                 new VarDeclStmt("v", new IntType()),
                 new CompStmt(
@@ -29,8 +115,9 @@ public class Interpreter {
                         new PrintStmt(new VarExp("v"))
                 )
         );
-        addProgram(menu, "1", ex1, "log1.txt");
+        allStmts.add(ex1);
 
+        // Example 2
         IStmt ex2 = new CompStmt(
                 new VarDeclStmt("a", new IntType()),
                 new CompStmt(
@@ -54,8 +141,9 @@ public class Interpreter {
                         )
                 )
         );
-        addProgram(menu, "2", ex2, "log2.txt");
+        allStmts.add(ex2);
 
+        // Example 3
         IStmt ex3 = new CompStmt(
                 new VarDeclStmt("a", new BoolType()),
                 new CompStmt(
@@ -73,25 +161,26 @@ public class Interpreter {
                         )
                 )
         );
-        addProgram(menu, "3", ex3, "log3.txt");
+        allStmts.add(ex3);
 
+        // Example 4 (File Operations)
         IStmt testExample = new CompStmt(
-                new VarDeclStmt("varf", new StringType()), // string varf;
+                new VarDeclStmt("varf", new StringType()),
                 new CompStmt(
-                        new AssignStmt("varf", new ValueExp(new StringValue("C:\\Users\\Gabriel Nasui\\InteliJProjects\\Lab3\\src\\test.in"))), // varf="test.in";
+                        new AssignStmt("varf", new ValueExp(new StringValue("test.in"))),
                         new CompStmt(
-                                new OpenRFile(new VarExp("varf")), // openRFile(varf);
+                                new OpenRFile(new VarExp("varf")),
                                 new CompStmt(
-                                        new VarDeclStmt("varc", new IntType()), // int varc;
+                                        new VarDeclStmt("varc", new IntType()),
                                         new CompStmt(
-                                                new ReadFile(new VarExp("varf"), "varc"), // readFile(varf,varc);
+                                                new ReadFile(new VarExp("varf"), "varc"),
                                                 new CompStmt(
-                                                        new PrintStmt(new VarExp("varc")), // print(varc);
+                                                        new PrintStmt(new VarExp("varc")),
                                                         new CompStmt(
-                                                                new ReadFile(new VarExp("varf"), "varc"), // readFile(varf,varc);
+                                                                new ReadFile(new VarExp("varf"), "varc"),
                                                                 new CompStmt(
-                                                                        new PrintStmt(new VarExp("varc")), // print(varc);
-                                                                        new CloseRFile(new VarExp("varf")) // closeRFile(varf)
+                                                                        new PrintStmt(new VarExp("varc")),
+                                                                        new CloseRFile(new VarExp("varf"))
                                                                 )
                                                         )
                                                 )
@@ -100,8 +189,9 @@ public class Interpreter {
                         )
                 )
         );
-        addProgram(menu, "4", testExample, "logTest.txt");
+        allStmts.add(testExample);
 
+        // Example 5 (Heap Allocation)
         IStmt heapAllocExample = new CompStmt(
                 new VarDeclStmt("v", new RefType(new IntType())),
                 new CompStmt(
@@ -115,8 +205,9 @@ public class Interpreter {
                         )
                 )
         );
-        addProgram(menu, "5", heapAllocExample, "log5.txt");
+        allStmts.add(heapAllocExample);
 
+        // Example 6 (Heap Reading)
         IStmt heapReadingExample = new CompStmt(
                 new VarDeclStmt("v",new RefType(new IntType())),
                 new CompStmt(
@@ -133,8 +224,9 @@ public class Interpreter {
                         )
                 )
         );
-        addProgram(menu, "6", heapReadingExample, "log6.txt");
+        allStmts.add(heapReadingExample);
 
+        // Example 7 (Heap Writing)
         IStmt heapWritingExample = new CompStmt(
                 new VarDeclStmt("v", new RefType(new IntType())),
                 new CompStmt(
@@ -148,8 +240,9 @@ public class Interpreter {
                         )
                 )
         );
-        addProgram(menu, "7", heapWritingExample, "log7.txt");
+        allStmts.add(heapWritingExample);
 
+        // Example 8 (While Statement)
         IStmt whileStmtExample = new CompStmt(
                 new VarDeclStmt("v", new IntType()),
                 new CompStmt(
@@ -162,8 +255,9 @@ public class Interpreter {
                         )
                 )
         );
-        addProgram(menu, "8", whileStmtExample, "log8.txt");
+        allStmts.add(whileStmtExample);
 
+        // Example 9 (Garbage Collector)
         IStmt garbageCollectorExample = new CompStmt(
                 new VarDeclStmt("v", new RefType(new IntType())),
                 new CompStmt(
@@ -180,8 +274,9 @@ public class Interpreter {
                         )
                 )
         );
-        addProgram(menu, "9", garbageCollectorExample, "log9.txt");
+        allStmts.add(garbageCollectorExample);
 
+        // Example 10 (Deep Ref Garbage Collector)
         IStmt deepRefGarbageCollector = new CompStmt(
                 new VarDeclStmt("r1", new RefType(new IntType())),
                 new CompStmt(
@@ -223,8 +318,9 @@ public class Interpreter {
                         )
                 )
         );
-        addProgram(menu, "10", deepRefGarbageCollector, "log10.txt");
+        allStmts.add(deepRefGarbageCollector);
 
+        // Example 11 (Threads)
         IStmt threadsExample = new CompStmt(
                 new VarDeclStmt("v", new IntType()),
                 new CompStmt(
@@ -232,50 +328,31 @@ public class Interpreter {
                         new CompStmt(
                                 new AssignStmt("v", new ValueExp(new IntValue(10))),
                                 new CompStmt(
-                                    new NewStmt("a", new ValueExp(new IntValue(22))),
-                                    new CompStmt(
-                                            new ForkStmt(
-                                                    new CompStmt(
-                                                            new WriteHeapStmt("a", new ValueExp(new IntValue(30))),
-                                                            new CompStmt(
-                                                                    new AssignStmt("v", new ValueExp(new IntValue(32))),
-                                                                    new CompStmt(
-                                                                            new PrintStmt(new VarExp("v")),
-                                                                            new PrintStmt(new ReadHeapExp(new VarExp("a")))
-                                                                    )
-                                                            )
-                                                    )
-                                            ),
-                                            new CompStmt(
-                                                      new PrintStmt(new VarExp("v")),
-                                                    new PrintStmt(new ReadHeapExp(new VarExp("a")))
-                                            )
-                                    )
+                                        new NewStmt("a", new ValueExp(new IntValue(22))),
+                                        new CompStmt(
+                                                new ForkStmt(
+                                                        new CompStmt(
+                                                                new WriteHeapStmt("a", new ValueExp(new IntValue(30))),
+                                                                new CompStmt(
+                                                                        new AssignStmt("v", new ValueExp(new IntValue(32))),
+                                                                        new CompStmt(
+                                                                                new PrintStmt(new VarExp("v")),
+                                                                                new PrintStmt(new ReadHeapExp(new VarExp("a")))
+                                                                        )
+                                                                )
+                                                        )
+                                                ),
+                                                new CompStmt(
+                                                        new PrintStmt(new VarExp("v")),
+                                                        new PrintStmt(new ReadHeapExp(new VarExp("a")))
+                                                )
+                                        )
                                 )
                         )
                 )
         );
-        addProgram(menu, "11", threadsExample, "log11.txt");
+        allStmts.add(threadsExample);
 
-        menu.addCommand(new ExitCommand("0","exit"));
-        menu.show();
-    }
-
-    private static void addProgram(TextMenu menu, String key, IStmt stmt, String logFilePath) {
-        try {
-            MyDictionary<String, IType> typeEnv = new MyDictionary<>();
-            stmt.typecheck(typeEnv);
-
-            PrgState prg = new PrgState(new MyStack<>(), new MyDictionary<>(), new MyList<>(), new MyDictionary<>(), new MyDictionaryHeap(), stmt);
-            IRepo repo = new Repo(prg, logFilePath);
-            Controller controller = new Controller(repo);
-
-            menu.addCommand(new RunExample(key, stmt.toString(), controller));
-        } catch (MyException | RuntimeException e) {
-            System.out.println("------------------------------------------------------");
-            System.out.println("ERROR: Example " + key + " failed type checking!");
-            System.out.println("Reason: " + e.getMessage());
-            System.out.println("------------------------------------------------------");
-        }
+        return FXCollections.observableArrayList(allStmts);
     }
 }

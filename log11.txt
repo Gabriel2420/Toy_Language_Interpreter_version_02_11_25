@@ -659,3 +659,664 @@ Heap:
 
 -----------------------------------
 
+Garbage collector removed: 
+  (nothing)
+-----------------------------------
+
+Id:
+11
+Exe stack:
+(int v ; (Ref(int) a ; (v=10 ; (new(a, 22) ; (fork((wH(a,30) ; (v=32 ; (print(v) ; print(rH(a)))))) ; (print(v) ; print(rH(a))))))))
+SymTable:
+Out:
+FileTable:
+Heap:
+
+-----------------------------------
+
+Id:
+11
+Exe stack:
+int v
+(Ref(int) a ; (v=10 ; (new(a, 22) ; (fork((wH(a,30) ; (v=32 ; (print(v) ; print(rH(a)))))) ; (print(v) ; print(rH(a)))))))
+SymTable:
+Out:
+FileTable:
+Heap:
+
+-----------------------------------
+
+Garbage collector removed: 
+  (nothing)
+-----------------------------------
+
+Id:
+11
+Exe stack:
+int v
+(Ref(int) a ; (v=10 ; (new(a, 22) ; (fork((wH(a,30) ; (v=32 ; (print(v) ; print(rH(a)))))) ; (print(v) ; print(rH(a)))))))
+SymTable:
+Out:
+FileTable:
+Heap:
+
+-----------------------------------
+
+Id:
+11
+Exe stack:
+(Ref(int) a ; (v=10 ; (new(a, 22) ; (fork((wH(a,30) ; (v=32 ; (print(v) ; print(rH(a)))))) ; (print(v) ; print(rH(a)))))))
+SymTable:
+v --> 0
+Out:
+FileTable:
+Heap:
+
+-----------------------------------
+
+Garbage collector removed: 
+  (nothing)
+-----------------------------------
+
+Id:
+11
+Exe stack:
+(Ref(int) a ; (v=10 ; (new(a, 22) ; (fork((wH(a,30) ; (v=32 ; (print(v) ; print(rH(a)))))) ; (print(v) ; print(rH(a)))))))
+SymTable:
+v --> 0
+Out:
+FileTable:
+Heap:
+
+-----------------------------------
+
+Id:
+11
+Exe stack:
+Ref(int) a
+(v=10 ; (new(a, 22) ; (fork((wH(a,30) ; (v=32 ; (print(v) ; print(rH(a)))))) ; (print(v) ; print(rH(a))))))
+SymTable:
+v --> 0
+Out:
+FileTable:
+Heap:
+
+-----------------------------------
+
+Garbage collector removed: 
+  (nothing)
+-----------------------------------
+
+Id:
+11
+Exe stack:
+Ref(int) a
+(v=10 ; (new(a, 22) ; (fork((wH(a,30) ; (v=32 ; (print(v) ; print(rH(a)))))) ; (print(v) ; print(rH(a))))))
+SymTable:
+v --> 0
+Out:
+FileTable:
+Heap:
+
+-----------------------------------
+
+Id:
+11
+Exe stack:
+(v=10 ; (new(a, 22) ; (fork((wH(a,30) ; (v=32 ; (print(v) ; print(rH(a)))))) ; (print(v) ; print(rH(a))))))
+SymTable:
+a --> 0
+v --> 0
+Out:
+FileTable:
+Heap:
+
+-----------------------------------
+
+Garbage collector removed: 
+  (nothing)
+-----------------------------------
+
+Id:
+11
+Exe stack:
+(v=10 ; (new(a, 22) ; (fork((wH(a,30) ; (v=32 ; (print(v) ; print(rH(a)))))) ; (print(v) ; print(rH(a))))))
+SymTable:
+a --> 0
+v --> 0
+Out:
+FileTable:
+Heap:
+
+-----------------------------------
+
+Id:
+11
+Exe stack:
+v=10
+(new(a, 22) ; (fork((wH(a,30) ; (v=32 ; (print(v) ; print(rH(a)))))) ; (print(v) ; print(rH(a)))))
+SymTable:
+a --> 0
+v --> 0
+Out:
+FileTable:
+Heap:
+
+-----------------------------------
+
+Garbage collector removed: 
+  (nothing)
+-----------------------------------
+
+Id:
+11
+Exe stack:
+v=10
+(new(a, 22) ; (fork((wH(a,30) ; (v=32 ; (print(v) ; print(rH(a)))))) ; (print(v) ; print(rH(a)))))
+SymTable:
+a --> 0
+v --> 0
+Out:
+FileTable:
+Heap:
+
+-----------------------------------
+
+Id:
+11
+Exe stack:
+(new(a, 22) ; (fork((wH(a,30) ; (v=32 ; (print(v) ; print(rH(a)))))) ; (print(v) ; print(rH(a)))))
+SymTable:
+a --> 0
+v --> 10
+Out:
+FileTable:
+Heap:
+
+-----------------------------------
+
+Garbage collector removed: 
+  (nothing)
+-----------------------------------
+
+Id:
+11
+Exe stack:
+(new(a, 22) ; (fork((wH(a,30) ; (v=32 ; (print(v) ; print(rH(a)))))) ; (print(v) ; print(rH(a)))))
+SymTable:
+a --> 0
+v --> 10
+Out:
+FileTable:
+Heap:
+
+-----------------------------------
+
+Id:
+11
+Exe stack:
+new(a, 22)
+(fork((wH(a,30) ; (v=32 ; (print(v) ; print(rH(a)))))) ; (print(v) ; print(rH(a))))
+SymTable:
+a --> 0
+v --> 10
+Out:
+FileTable:
+Heap:
+
+-----------------------------------
+
+Garbage collector removed: 
+  (nothing)
+-----------------------------------
+
+Id:
+11
+Exe stack:
+new(a, 22)
+(fork((wH(a,30) ; (v=32 ; (print(v) ; print(rH(a)))))) ; (print(v) ; print(rH(a))))
+SymTable:
+a --> 0
+v --> 10
+Out:
+FileTable:
+Heap:
+
+-----------------------------------
+
+Id:
+11
+Exe stack:
+(fork((wH(a,30) ; (v=32 ; (print(v) ; print(rH(a)))))) ; (print(v) ; print(rH(a))))
+SymTable:
+a --> 1
+v --> 10
+Out:
+FileTable:
+Heap:
+1 --> 22
+
+-----------------------------------
+
+Garbage collector removed: 
+  (nothing)
+-----------------------------------
+
+Id:
+11
+Exe stack:
+(fork((wH(a,30) ; (v=32 ; (print(v) ; print(rH(a)))))) ; (print(v) ; print(rH(a))))
+SymTable:
+a --> 1
+v --> 10
+Out:
+FileTable:
+Heap:
+1 --> 22
+
+-----------------------------------
+
+Id:
+11
+Exe stack:
+fork((wH(a,30) ; (v=32 ; (print(v) ; print(rH(a))))))
+(print(v) ; print(rH(a)))
+SymTable:
+a --> 1
+v --> 10
+Out:
+FileTable:
+Heap:
+1 --> 22
+
+-----------------------------------
+
+Garbage collector removed: 
+  (nothing)
+-----------------------------------
+
+Id:
+11
+Exe stack:
+fork((wH(a,30) ; (v=32 ; (print(v) ; print(rH(a))))))
+(print(v) ; print(rH(a)))
+SymTable:
+a --> 1
+v --> 10
+Out:
+FileTable:
+Heap:
+1 --> 22
+
+-----------------------------------
+
+Id:
+11
+Exe stack:
+(print(v) ; print(rH(a)))
+SymTable:
+a --> 1
+v --> 10
+Out:
+FileTable:
+Heap:
+1 --> 22
+
+-----------------------------------
+
+Id:
+12
+Exe stack:
+(wH(a,30) ; (v=32 ; (print(v) ; print(rH(a)))))
+SymTable:
+a --> 1
+v --> 10
+Out:
+FileTable:
+Heap:
+1 --> 22
+
+-----------------------------------
+
+Garbage collector removed: 
+  (nothing)
+-----------------------------------
+
+Id:
+11
+Exe stack:
+(print(v) ; print(rH(a)))
+SymTable:
+a --> 1
+v --> 10
+Out:
+FileTable:
+Heap:
+1 --> 22
+
+-----------------------------------
+
+Id:
+12
+Exe stack:
+(wH(a,30) ; (v=32 ; (print(v) ; print(rH(a)))))
+SymTable:
+a --> 1
+v --> 10
+Out:
+FileTable:
+Heap:
+1 --> 22
+
+-----------------------------------
+
+Id:
+11
+Exe stack:
+print(v)
+print(rH(a))
+SymTable:
+a --> 1
+v --> 10
+Out:
+FileTable:
+Heap:
+1 --> 22
+
+-----------------------------------
+
+Id:
+12
+Exe stack:
+wH(a,30)
+(v=32 ; (print(v) ; print(rH(a))))
+SymTable:
+a --> 1
+v --> 10
+Out:
+FileTable:
+Heap:
+1 --> 22
+
+-----------------------------------
+
+Garbage collector removed: 
+  (nothing)
+-----------------------------------
+
+Id:
+11
+Exe stack:
+print(v)
+print(rH(a))
+SymTable:
+a --> 1
+v --> 10
+Out:
+FileTable:
+Heap:
+1 --> 22
+
+-----------------------------------
+
+Id:
+12
+Exe stack:
+wH(a,30)
+(v=32 ; (print(v) ; print(rH(a))))
+SymTable:
+a --> 1
+v --> 10
+Out:
+FileTable:
+Heap:
+1 --> 22
+
+-----------------------------------
+
+Id:
+11
+Exe stack:
+print(rH(a))
+SymTable:
+a --> 1
+v --> 10
+Out:
+10
+FileTable:
+Heap:
+1 --> 30
+
+-----------------------------------
+
+Id:
+12
+Exe stack:
+(v=32 ; (print(v) ; print(rH(a))))
+SymTable:
+a --> 1
+v --> 10
+Out:
+10
+FileTable:
+Heap:
+1 --> 30
+
+-----------------------------------
+
+Garbage collector removed: 
+  (nothing)
+-----------------------------------
+
+Id:
+11
+Exe stack:
+print(rH(a))
+SymTable:
+a --> 1
+v --> 10
+Out:
+10
+FileTable:
+Heap:
+1 --> 30
+
+-----------------------------------
+
+Id:
+12
+Exe stack:
+(v=32 ; (print(v) ; print(rH(a))))
+SymTable:
+a --> 1
+v --> 10
+Out:
+10
+FileTable:
+Heap:
+1 --> 30
+
+-----------------------------------
+
+Id:
+11
+Exe stack:
+SymTable:
+a --> 1
+v --> 10
+Out:
+10
+30
+FileTable:
+Heap:
+1 --> 30
+
+-----------------------------------
+
+Id:
+12
+Exe stack:
+v=32
+(print(v) ; print(rH(a)))
+SymTable:
+a --> 1
+v --> 10
+Out:
+10
+30
+FileTable:
+Heap:
+1 --> 30
+
+-----------------------------------
+
+Garbage collector removed: 
+  (nothing)
+-----------------------------------
+
+Id:
+12
+Exe stack:
+v=32
+(print(v) ; print(rH(a)))
+SymTable:
+a --> 1
+v --> 10
+Out:
+10
+30
+FileTable:
+Heap:
+1 --> 30
+
+-----------------------------------
+
+Id:
+12
+Exe stack:
+(print(v) ; print(rH(a)))
+SymTable:
+a --> 1
+v --> 32
+Out:
+10
+30
+FileTable:
+Heap:
+1 --> 30
+
+-----------------------------------
+
+Garbage collector removed: 
+  (nothing)
+-----------------------------------
+
+Id:
+12
+Exe stack:
+(print(v) ; print(rH(a)))
+SymTable:
+a --> 1
+v --> 32
+Out:
+10
+30
+FileTable:
+Heap:
+1 --> 30
+
+-----------------------------------
+
+Id:
+12
+Exe stack:
+print(v)
+print(rH(a))
+SymTable:
+a --> 1
+v --> 32
+Out:
+10
+30
+FileTable:
+Heap:
+1 --> 30
+
+-----------------------------------
+
+Garbage collector removed: 
+  (nothing)
+-----------------------------------
+
+Id:
+12
+Exe stack:
+print(v)
+print(rH(a))
+SymTable:
+a --> 1
+v --> 32
+Out:
+10
+30
+FileTable:
+Heap:
+1 --> 30
+
+-----------------------------------
+
+Id:
+12
+Exe stack:
+print(rH(a))
+SymTable:
+a --> 1
+v --> 32
+Out:
+10
+30
+32
+FileTable:
+Heap:
+1 --> 30
+
+-----------------------------------
+
+Garbage collector removed: 
+  (nothing)
+-----------------------------------
+
+Id:
+12
+Exe stack:
+print(rH(a))
+SymTable:
+a --> 1
+v --> 32
+Out:
+10
+30
+32
+FileTable:
+Heap:
+1 --> 30
+
+-----------------------------------
+
+Id:
+12
+Exe stack:
+SymTable:
+a --> 1
+v --> 32
+Out:
+10
+30
+32
+30
+FileTable:
+Heap:
+1 --> 30
+
+-----------------------------------
+

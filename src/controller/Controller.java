@@ -19,6 +19,11 @@ public class Controller {
 
     public Controller(IRepo repo) {
         this.repo = repo;
+        this.executor = Executors.newFixedThreadPool(2);
+    }
+
+    public IRepo getRepository() {
+        return repo;
     }
 
     public Map<Integer, IValue> safeGarbageCollector(List<Integer> symTableAddresses, Map<Integer, IValue> heap, Set<Integer> removedOut) {
